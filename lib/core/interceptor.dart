@@ -15,7 +15,8 @@ class JwtInterceptor extends Interceptor {
 
       options.headers['Authorization'] = bearerToken;
     }
-    options.headers.addAll({"apikey": "${dotenv.env["API_KEY"]}"});
+    options.headers['apikey'] = dotenv.env["API_KEY"];
+
     handler.next(options);
   }
 }

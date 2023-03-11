@@ -16,6 +16,7 @@ class CustomInputDecoration extends InputDecoration {
               borderSide: const BorderSide(color: redColor, width: 0.7),
               borderRadius: CustomRadius.size10(),
             ),
+            labelText: hintText,
             focusedErrorBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: redColor, width: 0.7),
               borderRadius: CustomRadius.size10(),

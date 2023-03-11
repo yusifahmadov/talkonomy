@@ -8,7 +8,7 @@ part of 'response_model.dart';
 
 ResponseModel _$ResponseModelFromJson(Map<String, dynamic> json) =>
     ResponseModel(
-      json['msg'] as String,
+      json['msg'] as String?,
     );
 
 Map<String, dynamic> _$ResponseModelToJson(ResponseModel instance) =>

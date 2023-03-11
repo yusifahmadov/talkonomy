@@ -66,7 +66,7 @@ class LoginPageView extends StatelessWidget {
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const HomePageView(),
+                            builder: (context) => HomePageView(),
                           ),
                           (route) => false);
                     } else {
