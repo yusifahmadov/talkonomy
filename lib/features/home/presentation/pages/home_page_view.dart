@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:talkonomy_app/core/radius/custom_radius.dart';
 import 'package:talkonomy_app/features/chat/presentation/pages/chat_page_view.dart';
+import 'package:talkonomy_app/features/user/presentation/pages/user_detail/user_detail_page_view.dart';
 
 class HomePageView extends StatefulWidget {
   const HomePageView({super.key});
@@ -32,10 +33,14 @@ class _HomePageViewState extends State<HomePageView> {
         style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontSize: 18.sp),
       ),
       centerTitle: true,
-      actions: const [
+      actions: [
         Padding(
-          padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-          child: CircleAvatar(),
+          padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+          child: InkWell(
+              onTap: () async {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const UserDetailPageView()));
+              },
+              child: const CircleAvatar()),
         )
       ],
       leading: Padding(

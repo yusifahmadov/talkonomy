@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:talkonomy_app/core/custom_flasher.dart';
 import 'package:talkonomy_app/features/user/data/models/user_model.dart';
 import 'package:talkonomy_app/features/user/presentation/bloc/user_cubit.dart';
 import '../../../../../core/shared_preferences/app_shared_preferences.dart';
@@ -27,7 +28,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
     on<LoggedIn>((event, emit) async {
       emit(AuthLoading());
-      print(event.userData.user.id);
+
       UserModel userData = await getIt<UserCubit>().getAuthUserData(id: event.userData.user.id!);
       UserResponseModel userResponseModel = UserResponseModel(
           accessToken: event.userData.accessToken,
@@ -40,6 +41,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               profileImage: userData.profileImage,
               verified: userData.verified));
       await AppSharedPreferences.saveUser("userData", userResponseModel);
+      CustomFlasher.showSuccess("Logged in");
+
       emit(AuthAuthenticated());
     });
     on<LoggedOut>(
@@ -47,6 +50,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthLoading());
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.remove("userData");
+        CustomFlasher.showSuccess("Logged out");
+        event.whenSuccess != null ? event.whenSuccess() : null;
         emit(AuthNotAuthenticated());
       },
     );

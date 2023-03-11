@@ -28,6 +28,7 @@ initBlocs() {
   getIt.registerFactory(() => LoginBloc(getIt(), getIt()));
   getIt.registerFactory(() => UserCubit(
         getIt(),
+        getIt(),
       ));
 }
 

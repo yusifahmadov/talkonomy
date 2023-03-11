@@ -12,6 +12,9 @@ class LoggedIn extends AuthEvent {
   const LoggedIn({required this.userData});
 }
 
-class LoggedOut extends AuthEvent {}
+class LoggedOut extends AuthEvent {
+  final dynamic whenSuccess;
+  const LoggedOut({this.whenSuccess});
+}
 
 class AppStarted extends AuthEvent {}

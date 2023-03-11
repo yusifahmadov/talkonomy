@@ -19,29 +19,31 @@ class UseCaseFetcher {
 
     final response = await useCase(model);
     response.fold((l) {
-      showFlash(
-          context: ctx!,
-          duration: const Duration(seconds: 4),
-          builder: (_, controller) {
-            return Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Flash(
-                controller: controller,
-                alignment: Alignment.topRight,
-                backgroundColor: const Color(0xffdc3545),
-                boxShadows: kElevationToShadow[2],
-                horizontalDismissDirection: HorizontalDismissDirection.horizontal,
-                child: IntrinsicWidth(
-                  child: FlashBar(
-                    content: Text(
-                      l.message,
-                      style: Theme.of(ctx!).textTheme.bodyMedium!.copyWith(color: Colors.white),
+      l != null && l.message != null
+          ? showFlash(
+              context: ctx!,
+              duration: const Duration(seconds: 4),
+              builder: (_, controller) {
+                return Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Flash(
+                    controller: controller,
+                    alignment: Alignment.topRight,
+                    backgroundColor: const Color(0xffdc3545),
+                    boxShadows: kElevationToShadow[2],
+                    horizontalDismissDirection: HorizontalDismissDirection.horizontal,
+                    child: IntrinsicWidth(
+                      child: FlashBar(
+                        content: Text(
+                          l.message,
+                          style: Theme.of(ctx!).textTheme.bodyMedium!.copyWith(color: Colors.white),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-            );
-          });
+                );
+              })
+          : null;
     }, (r) async {
       EasyLoading.dismiss();
 
